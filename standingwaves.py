@@ -51,15 +51,13 @@ class Application(Frame):
     quantum_number = float(self.quantum_number_input.get())
     step = float(self.precision_input.get()) 
     for amplitude in range(-50, 50, 3) + range(50, -50, -3):
-      [self.renderFrame(theta, amplitude, quantum_number) for theta in drange(0, 2, step)]
+      for theta in drange(0, 2, step):
+        r = amplitude * sin(quantum_number * pi * theta) + 200
+        y = sin(pi * theta) * r
+        x = cos(pi * theta) * r
+        self.canvas.create_line(280 + x, 280 + y, 281 + x, 281 + y, width = .001)
       self.simulation.update_idletasks()
-      self.canvas.delete(ALL)    
-
-  def renderFrame(self, theta, amplitude, quantum_number):
-    r = amplitude * sin(quantum_number * pi * theta) + 200
-    y = sin(pi * theta) * r
-    x = cos(pi * theta) * r
-    self.canvas.create_line(280 + x, 280 + y, 281 + x, 281 + y)
+      self.canvas.delete(ALL)
 
 def main():
   app = Application()
