@@ -1,4 +1,4 @@
-# Justin Svegliato
+        # Justin Svegliato
 from Tkinter import *
 from math import sin, cos, degrees, radians, pi, pow, ceil
 import time
@@ -74,30 +74,30 @@ class Application(Frame):
     initial_quantum_number = self.initial_quantum_number_input.get()
     next_quantum_number = self.next_quantum_number_input.get()
     if initial_quantum_number != "" and \
-       int(initial_quantum_number) > 0 and \
-       int(initial_quantum_number) < 21:
+       float(initial_quantum_number) > 0 and \
+       float(initial_quantum_number) < 21:
       if (next_quantum_number != "" and \
-          int(next_quantum_number) > 0 and \
-          int(next_quantum_number) < 21) or \
+          float(next_quantum_number) > 0 and \
+          float(next_quantum_number) < 21) or \
           next_quantum_number == "":
-        initial_energy_value = ceil(-13.60 / pow(int(initial_quantum_number), 2) * 100) / 100
+        initial_energy_value = ceil(-13.60 / pow(float(initial_quantum_number), 2) * 100) / 100
         self.initial_energy.set("Initial: " + str(initial_energy_value) + " eV")
         if next_quantum_number == "":
           self.next_energy.set("")
           self.energy_difference.set("")
         else:
-          next_energy_value = ceil(-13.60 / pow(int(next_quantum_number), 2) * 100) / 100
+          next_energy_value = ceil(-13.60 / pow(float(next_quantum_number), 2) * 100) / 100
           self.next_energy.set("New: " + str(next_energy_value) + " eV")
           difference = ceil((initial_energy_value - next_energy_value) * 100) / 100
-          self.energy_difference.set("Difference: " + str(difference) + " eV")
+          self.energy_difference.set("Difference: " + str(-difference) + " eV")
         self.animation = True
         self.drawCanvas() 
 
   def drawCanvas(self):
     quantum_numbers = [] 
-    quantum_numbers.append(int(self.initial_quantum_number_input.get())) 
+    quantum_numbers.append(float(self.initial_quantum_number_input.get())) 
     if self.next_quantum_number_input.get() != "": 
-      quantum_numbers.append(int(self.next_quantum_number_input.get())) 
+      quantum_numbers.append(float(self.next_quantum_number_input.get())) 
       
     if len(quantum_numbers) == 1: 
       self.drawWaves(quantum_numbers, 50, 200, (270, 290)) 
@@ -133,7 +133,7 @@ class Application(Frame):
     
 def main():
   app = Application()
-  app.master.title("Electron Orbital Simulator")
+  app.master.title("Electron Wave Simulator")
   def render():
     if app.animation and app.loop:
       app.loop = False
